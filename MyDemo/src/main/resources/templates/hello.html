@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+    <title>Hello World!</title>
+</head>
+<body>
+
+
+
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+
+<sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')">
+	<p>Must have ROLE_ADMIN and ROLE_USER</p>
+</sec:authorize>
+<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+	<p>Must have ROLE_ADMIN or ROLE_USER</p>
+</sec:authorize>
+<sec:authorize access="!hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+	<p>Must not have ROLE_ADMIN or ROLE_USER</p>
+</sec:authorize>
+
+
+
+<div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+		 	<p class="bg-info"> test by admin</p>
+		</div>	
+		
+
+<div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为 ROLE_USER 显示 -->
+		 	<p class="bg-info">无更多信息显示</p>
+		</div>	
+		
+
+       <form th:action="@{/logout}" method="post">
+    <input type="submit" value="注销"/>
+</form>
+
+   
+
+
+
+
+
+</body>
+</html>
