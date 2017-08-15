@@ -1,0 +1,5 @@
+激活全局注解 
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+
+才能使用@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+限制用户对控制层的访问
